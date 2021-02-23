@@ -12,7 +12,7 @@ keywords = ["keybase", "key", "derivation"]
 license = "MIT/Apache-2.0"
 repository = "https://github.com/mindbeam/keyplace"
 
-[dependencies]c
+[dependencies]
 ed25519-dalek= { version="1.0", features=["serde"] }
 scrypt = "0.4.1"
 toboggan-kv = { version = "0.1.2" }

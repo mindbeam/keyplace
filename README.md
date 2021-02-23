@@ -24,3 +24,17 @@ But wait, there's more:
 * You can implement secure key recovery techniques
 
 KeyPlace is inspired by the Keybase key derivation algorithm https://book.keybase.io/docs/crypto
+
+```
+use keyplace::{AgentKey,PassKey};
+let agentkey = AgentKey::create(None);
+
+let passkey = PassKey::new("I like turtles");
+let custkey = agentkey.custodial_key(passkey);
+
+// the custodial key is safe to send to the server
+// Never send the passkey to anyone!!
+
+let passkey2 = PassKey::new("I like turtles");
+let agentkey2 = AgentKey::from_custodial_key(custkey, passkey2).unwrap();
+```

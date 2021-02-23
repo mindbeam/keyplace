@@ -1,6 +1,6 @@
 [package]
 name = "keyplace"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Mindbeam Research Inc"]
 edition = "2018"
 readme = "README.md"
@@ -12,7 +12,7 @@ keywords = ["keybase", "key", "derivation"]
 license = "MIT/Apache-2.0"
 repository = "https://github.com/mindbeam/keyplace"
 
-[dependencies]
+[dependencies]c
 ed25519-dalek= { version="1.0", features=["serde"] }
 scrypt = "0.4.1"
 toboggan-kv = { version = "0.1.2" }

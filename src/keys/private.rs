@@ -78,17 +78,17 @@ impl AgentKey {
 
         KeyMask { mask }
     }
-    pub fn custodial_key(&self, passkey: PassKey) -> CustodialAgentKey {
+    pub fn custodial_key(&self, passkey: &PassKey) -> CustodialAgentKey {
         // Consume the PassKey to discourage the implementer from storing it
 
         CustodialAgentKey {
             pubkey: self.keypair.public.as_bytes().clone(),
-            mask: self.keymask(&passkey),
+            mask: self.keymask(passkey),
             check: self.hmac(),
             email: self.email.clone(),
         }
     }
-    pub fn from_custodial_key(custodial_key: CustodialAgentKey, passkey: PassKey) -> Result<Self, crate::Error> {
+    pub fn from_custodial_key(custodial_key: CustodialAgentKey, passkey: &PassKey) -> Result<Self, crate::Error> {
         // Consume the PassKey to discourage the implementer from storing it
 
         let mut secret = [0u8; 32];

@@ -119,7 +119,7 @@ fn generate_passkey_from_questions(slice: &[RecoveryQuestion]) -> PassKey {
     for q in slice {
         passphrase.push_str(&q.question.to_lowercase());
         passphrase.push_str("|");
-        passphrase.push_str(&q.question.to_lowercase());
+        passphrase.push_str(&q.answer.to_lowercase());
         passphrase.push_str(";");
     }
 
@@ -209,9 +209,12 @@ fn whoops_i_forgot_my_password(server: &FakeServer) -> Result<AgentKey, &'static
 
     let auth_match = server.recover("bob@cats.org".to_string(), attempts)?;
 
-    let agentkey = recovery_question_passkeys.iter().find_map(|passkey| {
+    let agentkey = recovery_question_passkeys.iter().enumerate().find_map(|(i, passkey)| {
         match AgentKey::from_custodial_key(auth_match.custodial_key.clone(), passkey) {
-            Ok(agentkey) => Some(agentkey),
+            Ok(agentkey) => {
+                println!("Matched offset: {i}");
+                Some(agentkey)
+            },
             Err(Error::Mac(_)) => None,
             _ => panic!("Illegal error type. TODO: handle this better"),
         }

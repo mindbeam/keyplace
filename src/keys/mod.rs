@@ -35,7 +35,7 @@ mod test {
             Ok(_) => panic!("This is not supposed to succeed"),
             Err(crate::Error::Mac(_)) => {
                 // All good
-            }
+            },
             _ => panic!("Not supposed to get here"),
         }
     }

@@ -25,12 +25,10 @@ where
     use serde::de::Error;
     match String::deserialize(deserializer) {
         Ok(string) => {
-            let bytes =
-                base64::decode(&string).map_err(|_| D::Error::custom("failed to decode base64"))?;
-            let array: &[u8; 64] = try_64_from_slice::<u8>(&bytes[..])
-                .map_err(|_| D::Error::custom("invalid length"))?;
+            let bytes = base64::decode(&string).map_err(|_| D::Error::custom("failed to decode base64"))?;
+            let array: &[u8; 64] = try_64_from_slice::<u8>(&bytes[..]).map_err(|_| D::Error::custom("invalid length"))?;
             Ok(array.clone())
-        }
+        },
         Err(_e) => Err(D::Error::custom("failed to deserialize")),
     }
 }

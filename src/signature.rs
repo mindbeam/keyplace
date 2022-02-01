@@ -21,10 +21,7 @@ impl Signature {
         let mut hasher: Sha512 = Sha512::default();
         content.hash(&mut hasher);
 
-        let sig = agentkey
-            .keypair
-            .sign_prehashed(hasher, Some(b"allegation"))
-            .unwrap();
+        let sig = agentkey.keypair.sign_prehashed(hasher, Some(b"allegation")).unwrap();
 
         Ok(Signature(sig.to_bytes()))
     }

@@ -6,25 +6,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct UserAuthKey {
-    #[serde(
-        serialize_with = "crate::util::as_base64",
-        deserialize_with = "crate::util::from_base64_32"
-    )]
+    #[serde(serialize_with = "crate::util::as_base64", deserialize_with = "crate::util::from_base64_32")]
     pub(crate) auth: [u8; 32],
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CustodialAgentKey {
-    #[serde(
-        serialize_with = "crate::util::as_base64",
-        deserialize_with = "crate::util::from_base64_32"
-    )]
+    #[serde(serialize_with = "crate::util::as_base64", deserialize_with = "crate::util::from_base64_32")]
     pub(crate) pubkey: [u8; 32],
     pub(crate) mask: KeyMask,
-    #[serde(
-        serialize_with = "crate::util::as_base64",
-        deserialize_with = "crate::util::from_base64_32"
-    )]
+    #[serde(serialize_with = "crate::util::as_base64", deserialize_with = "crate::util::from_base64_32")]
     pub(crate) check: [u8; 32],
     pub(crate) email: Option<String>,
 }
@@ -34,10 +25,7 @@ pub struct CustodialAgentKey {
 /// but without disclosure of the actual private key
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct KeyMask {
-    #[serde(
-        serialize_with = "crate::util::as_base64",
-        deserialize_with = "crate::util::from_base64_32"
-    )]
+    #[serde(serialize_with = "crate::util::as_base64", deserialize_with = "crate::util::from_base64_32")]
     pub(crate) mask: [u8; 32],
 }
 

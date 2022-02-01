@@ -37,7 +37,7 @@ where
             Some(ivec) => {
                 let agentkey: AgentKey = bincode::deserialize(&ivec)?;
                 Ok(Some(agentkey))
-            }
+            },
             None => Ok(None),
         }
     }
@@ -69,7 +69,7 @@ where
                     Some(a) => Ok(Some(a)),
                     None => Err(Error::InvalidReferent),
                 }
-            }
+            },
             None => Ok(None),
         }
     }
@@ -80,8 +80,7 @@ where
     T: Toboggan + Default,
 {
     fn default() -> Self {
-        KeyManager::new(Default::default())
-            .expect("should not fail for store which implements default")
+        KeyManager::new(Default::default()).expect("should not fail for store which implements default")
     }
 }
 
@@ -100,14 +99,7 @@ mod test {
         keymanager.put_agent_key(agentkey)?;
         keymanager.set_current_agent(id.clone())?;
 
-        assert_eq!(
-            keymanager
-                .current_agent_key()
-                .expect("is good")
-                .expect("is some")
-                .id(),
-            id
-        );
+        assert_eq!(keymanager.current_agent_key().expect("is good").expect("is some").id(), id);
 
         Ok(())
     }
